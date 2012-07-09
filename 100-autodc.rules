@@ -1,0 +1,13 @@
+# autodc rules to automatically detect DC plug and launch a script to get the images in user's filesystem
+
+# Canon Ixus
+ACTION=="add", ATTRS{idVendor}=="04a9", ATTRS{idProduct}=="31c2", RUN+="$script"
+
+# Canon 350D
+ACTION=="add", ATTRS{idVendor}=="04a9", ATTRS{idProduct}=="30ef", RUN+="$script"
+
+# Pentax K20D
+ACTION=="add", ATTRS{idVendor}=="04a9", ATTRS{idProduct}=="30ef", RUN+="$script"
+
+# submarine
+
