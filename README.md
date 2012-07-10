@@ -56,4 +56,4 @@ to be, just add a rule in the `100-autodc.rules` file, specifying the
 device with the command `lsusb` while it is plugged.
 
 Some me your udev values, I'll add them to the file for the world.
-
+Next step will be to find some values in a file like `/lib/udev/rules.d/60-libgphoto2-2.rules`.

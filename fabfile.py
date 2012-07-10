@@ -19,12 +19,14 @@ SCRIPT_FILE = 'autodc.py'
 
 
 # system
+import sys
 import tempfile
 from string import Template
 from os.path import join
 # fabric
 from fabric.api import cd, settings
 from fabric.operations import put
+from fabric.exceptions import NetworkError
 
 
 def deploy():
@@ -44,7 +46,10 @@ def deploy():
 
                 #put temp files on remote machine
                 with cd(ETCDIR):
-                    put(rules_temp, RULES_FILE)
+                    try:
+                        put(rules_temp, RULES_FILE)
+                    except NetworkError:
+                        sys.exit("[ERROR] Machine is unreachable!")
 
         # script file
         with settings( host_string=conf['host'], user=conf['user'] ):
@@ -58,5 +63,8 @@ def deploy():
 
                 # put temp files on remote machine
                 with cd(BINDIR):
-                    put(script_temp, SCRIPT_FILE, mode=0755)
+                    try:
+                        put(script_temp, SCRIPT_FILE, mode=0755)
+                    except NetworkError:
+                        sys.exit("[ERROR] Machine is unreachable!")
 
