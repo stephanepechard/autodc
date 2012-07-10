@@ -10,8 +10,8 @@ It is made of two files:
 Configuration is kinda specific to my way of doing on my Linux box. I use:
  * [gphoto](http://gphoto.org) to get the pictures from the camera ;
  * [Fabric](http://docs.fabfile.org) to deploy both files ;
- * bootstrap, a personal treat to create a
- [virtualenv](http://www.virtualenv.org) containing all you need.
+ * a personal script to create a
+ [virtualenv](http://www.virtualenv.org) containing all we need to use **autodc**.
 
 
 Install
@@ -33,7 +33,8 @@ to enter the virtual environment.
 Configuration
 -------------
 You need to specify in the `fabfile.py` file what machines you want **autodc**
-to be usable from. There's already one configuration to see as an example:
+to be usable from. There's already one configuration to see as an example,
+add our own other configurations like this:
 
     CONFIGS = [
         {'host':'192.168.0.1',
@@ -46,14 +47,19 @@ to be usable from. There's already one configuration to see as an example:
         },
     ]
 
-For every machine you have, just set the local IP address, the corresponding
+For every machine you have, set the local IP address, the corresponding
 user name and the directory you want the pictures to be transferred in.
 BE CAREFUL to specify a directory that is into the user's `/home` directory.
+
+If you just need to install it on the current machine, just type:
+
+    mkdir -p ~/bin && cp autodc.py ~/bin && sudo cp 100-autodc.rules /etc/udev/rules.d/
+
 
 
 Supported cameras
 -----------------
-1285 camera identities were taken from the file
+**1285** camera identities were taken from the file
 `/lib/udev/rules.d/60-libgphoto2-2.rules` of
 [Debian](http://debian.org) package 
 [libgphoto2](http://packages.debian.org/wheezy/libgphoto2-2).
