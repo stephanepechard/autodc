@@ -20,11 +20,14 @@ Clone the repository and just type:
 
     source bootstrap
 
-to create the virtualenv, get the dependencies and start being able to use
-autodc. Then, configure the `fabfile.py` file and deploy the code over the
-machines you configure it to with:
+to create and enter the virtualenv, get the dependencies and start
+being able to use **autodc**. Then, configure the `fabfile.py` file
+and deploy the code over the machines you configure it to with:
 
     fab deploy
+
+When you need to deploy the files again at a later point, don't forget
+to enter the virtual environment.
 
 
 Configuration
@@ -50,10 +53,12 @@ BE CAREFUL to specify a directory that is into the user's `/home` directory.
 
 Supported cameras
 -----------------
-For the moment, only the few cameras I own are supported. If you want yours
-to be, just add a rule in the `100-autodc.rules` file, specifying the
-`ATTRS{idVendor}` and `ATTRS{idProduct}` values. You can find them for your own
-device with the command `lsusb` while it is plugged.
+1285 camera identities were taken from the file
+`/lib/udev/rules.d/60-libgphoto2-2.rules` of
+[Debian](http://debian.org) package 
+[libgphoto2](http://packages.debian.org/wheezy/libgphoto2-2).
+The only drawback is not to be able to know the exact camera model
+corresponding this list.
 
-Some me your udev values, I'll add them to the file for the world.
-Next step will be to find some values in a file like `/lib/udev/rules.d/60-libgphoto2-2.rules`.
+If you need some more identities, feel free to propose an addition.
+You can find it with the command `lsusb` while your device is plugged.
