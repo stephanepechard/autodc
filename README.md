@@ -48,3 +48,12 @@ user name and the directory you want the pictures to be transferred in.
 BE CAREFUL to specify a directory that is into the user's `/home` directory.
 
 
+Supported cameras
+-----------------
+For the moment, only the few cameras I own are supported. If you want yours
+to be, just add a rule in the `100-autodc.rules` file, specifying the
+`ATTRS{idVendor}` and `ATTRS{idProduct}` values. You can find them for your own
+device with the command `lsusb` while it is plugged.
+
+Some me your udev values, I'll add them to the file for the world.
+
