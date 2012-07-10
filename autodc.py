@@ -72,7 +72,7 @@ def main():
 
 
     # create the directory and cd there
-    dir_name = None #$autodc_directory + camera_name
+    dir_name = os.path.join($autodc_directory, camera_name)
     if not os.path.isdir(dir_name):
         try:
             os.makedirs(dir_name)

@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """ Deployment of autodc. """
 
-# directories should end by a '/' AND should be into user's home
+# directories should be into user's home
 CONFIGS = [
     {'host':'192.168.0.1',
      'user':'user',
