@@ -21,8 +21,13 @@ Clone the repository and just type:
     source bootstrap
 
 to create and enter the virtualenv, get the dependencies and start
-being able to use **autodc**. Then, configure the `fabfile.py` file
-and deploy the code over the machines you configure it to with:
+being able to use **autodc**. If you just need to install it
+on the current machine, type:
+
+    mkdir -p ~/bin && cp autodc.py ~/bin && sudo cp 100-autodc.rules /etc/udev/rules.d/
+
+If you need to deploy the files over many computers, configure the `fabfile.py`
+file and deploy the code over the machines you configure it to with:
 
     fab deploy
 
@@ -50,11 +55,6 @@ add our own other configurations like this:
 For every machine you have, set the local IP address, the corresponding
 user name and the directory you want the pictures to be transferred in.
 BE CAREFUL to specify a directory that is into the user's `/home` directory.
-
-If you just need to install it on the current machine, just type:
-
-    mkdir -p ~/bin && cp autodc.py ~/bin && sudo cp 100-autodc.rules /etc/udev/rules.d/
-
 
 
 Supported cameras
