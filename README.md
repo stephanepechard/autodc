@@ -1,8 +1,8 @@
 autodc
 ======
 
-**autodc** is a small script used to automatize the transfer of digital images
-from a digital camera into a specified directory.
+**autodc** is a small script used to automatize the transfer
+of digital pictures from a digital camera into a specified directory.
 It is made of two files:
  * a rule file for [udev](http://wiki.debian.org/udev) ;
  * a [Python](http://python.org) script to be launched when a camera is plugged.
@@ -73,7 +73,7 @@ You can find it with the command `lsusb` while your device is plugged.
 Limitations
 -----------
 Two main limitations are known and unlikely to be corrected in any way.
-The first one is that images are not renamed, which is convenient 
+The first one is that pictures are not renamed, which is convenient 
 in dedicated softwares when pictures are imported. The used name is
 then the name given by the digital camera. Images are separated in
 directories named after the camera model. But if you plug different
