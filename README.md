@@ -68,3 +68,20 @@ corresponding this list.
 
 If you need some more identities, feel free to propose an addition.
 You can find it with the command `lsusb` while your device is plugged.
+
+
+Limitations
+-----------
+Two main limitations are known and unlikely to be corrected in any way.
+The first one is that images are not renamed, which is convenient 
+in dedicated softwares when pictures are imported. The used name is
+then the name given by the digital camera. Images are separated in
+directories named after the camera model. But if you plug different
+cameras of the same model, it may happen that your first pictures
+are overwritten. This would be a pity. So always consider the incoming 
+directory as a temporary storage before your own classification.
+
+The second limitation is that no information is kept about
+what pictures have already been transfered, so if you plug
+a camera twice, pictures are transfered again and overwritten.
+You know it, you handle it.
