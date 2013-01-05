@@ -1,7 +1,8 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-""" autodc.py Python script.
-    Created by Stéphane Péchard on 2012-06-24. """
+""" autodc.py, created by Stéphane Péchard on 2012-06-24. """
+
+__version__ = $version
 
 # system
 import dbus
@@ -29,6 +30,7 @@ def setuid_from_homepath(path):
     username = username_from_homepath(path)
     uid = getpwnam(username).pw_uid
     os.setuid(uid)
+    return username
 
 
 def log_and_exit(message):
@@ -39,16 +41,16 @@ def log_and_exit(message):
 
 def main():
     """ Main function. """
-    setuid_from_homepath(os.path.abspath( __file__ ))
+    username = setuid_from_homepath(os.path.abspath( __file__ ))
 
     # start logging
-    print("[INFO] getDCcontent.py version 0.1,"
-                                    " created by Stéphane Péchard.")
+    print("[INFO] autodc.py version {0}, created by Stéphane Péchard."
+          .format(__version__))
     logging.basicConfig(format='%(levelname)s:%(message)s',
-                        filename='/tmp/dc_content_{0}.log'
+                        filename='/tmp/autodc_{0}.log'
                                  .format(datetime.now().isoformat()),
                         level=logging.INFO)
-    logging.info('Start')
+    logging.info('Start with uid: {0}'.format(username))
 
 
     # find which camera is plugged
@@ -72,7 +74,7 @@ def main():
 
 
     # create the directory and cd there
-    dir_name = os.path.join($autodc_directory, camera_name)
+    dir_name = os.path.join('$autodc_directory', camera_name)
     if not os.path.isdir(dir_name):
         try:
             os.makedirs(dir_name)
@@ -91,20 +93,18 @@ def main():
         log_and_exit("gphoto2 did not finish well, sorry!")
 
 
-    # notify the user
+    # notify the user (only kde for now)
     try:
         knotify = dbus.SessionBus().get_object('org.kde.knotify',
                                                '/Notify')
-        knid = knotify.event('warning', 'kde', [],
-                             'Auto copy',
+        knid = knotify.event('warning', 'kde', [], 'Auto copy',
                              'Images from {0} have been copied!'
-                             .format(camera_name),
-                             [], [], 0, 16,
+                             .format(camera_name), [], [], 0, 16,
                              dbus_interface="org.kde.KNotify")
-        time.sleep(16)
+        time.sleep(8)
         knotify.closeNotification(knid)
     except dbus.exceptions.DBusException:
-        log_and_exit("notification couldn't be launched...")
+        log_and_exit("Notification couldn't be launched...")
 
 
     # terminate
@@ -113,4 +113,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
