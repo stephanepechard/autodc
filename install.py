@@ -32,7 +32,7 @@ def create_templated_file(target, template, substitutes):
         creation = True
     except IOError:
         creation = False
-        
+
     return creation
 
 
@@ -47,24 +47,24 @@ found_dir = os.path.join(os.environ['HOME'], 'bin')
 asked_dir = raw_input("[INPUT] Directory to install autodc script in [{0}] "
                       .format(found_dir))
 bin_dir = found_dir if not asked_dir else asked_dir
-create_dir(bin_dir) # create it if it does not exist already
+create_dir(bin_dir)  # create it if it does not exist already
 
 # ask directory to images into (default: ~/Images)
 image_dir = os.path.join(os.environ['HOME'], 'Images')
 asked_dir = raw_input("[INPUT] Directory to put images in [{0}] ".format(image_dir))
 images_dir = image_dir if not asked_dir else asked_dir
-create_dir(images_dir) # create it if it does not exist already
+create_dir(images_dir)  # create it if it does not exist already
 
 # create rules file
 rules_target = '/tmp/100-autodc.rules'
-source = os.path.join(os.path.dirname( __file__ ), '100-autodc.template')
+source = os.path.join(os.path.dirname(__file__), '100-autodc.template')
 script_path = os.path.join(bin_dir, 'autodc.py')
 subs = {'script': script_path}
 if not create_templated_file(rules_target, source, subs):
     sys.exit('[ERROR] Failed to create rules file!')
 
 # create and copy user script
-source = os.path.join(os.path.dirname( __file__ ), 'autodc.template')
+source = os.path.join(os.path.dirname(__file__), 'autodc.template')
 subs = {'autodc_directory': images_dir, 'version': __version__}
 if not create_templated_file(script_path, source, subs):
     sys.exit('[ERROR] Failed to create script file!')
